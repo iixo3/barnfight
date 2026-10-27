@@ -1,0 +1,40 @@
+# Dependencies, build output and tool caches
+node_modules/
+.next/
+out/
+dist/
+.vercel/
+.wrangler/
+.nx/
+.idea/
+*.tsbuildinfo
+
+# Local settings and keys: never commit
+.env
+.env.*
+!.env.example
+*.env
+*.key
+*.pem
+*-keypair.json
+id.json
+wallet.json
+keys/
+meme-tank-main/anchor/target/deploy/
+.firebaserc
+.firebase/
+firebaseServiceAccount.json
+*serviceAccount*.json
+*service-account*.json
+*-firebase-adminsdk-*.json
+.npmrc
+
+
+# Editor, assistant and system files
+.vscode/settings.json
+.claude/
+CLAUDE.md
+.mcp.json
+.DS_Store
+*.swp
+*.log

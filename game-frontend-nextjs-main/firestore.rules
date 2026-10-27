@@ -1,0 +1,42 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /tokens/{tokenId} {
+      allow read: if true;
+    }
+    
+    match /game/{gameId} {
+      allow read: if true;
+    }
+
+    match /users/{userId} {
+      allow read: if true;
+    }
+
+    match /participation/{participationId} {
+      allow read: if true;
+    }
+
+    match /user/{userId} {
+
+      allow read: if true;
+
+      allow update: if request.auth != null && request.auth.uid == userId && isUniqueUsername();
+
+      function isUniqueUsername() {
+        // Only allow the update if the username does not already exist in the /usernames collection
+        return !(request.resource.data.keys().hasAny(['username'])) ||
+               request.resource.data.username == resource.data.username ||
+               !exists(/databases/$(database)/documents/usernames/$(request.resource.data.username));
+      }
+    }
+
+    // Handle the /usernames/{username} document
+    match /usernames/{username} {
+      allow create: if request.auth != null;
+      allow delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+  }
+}

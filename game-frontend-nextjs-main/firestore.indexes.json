@@ -1,0 +1,45 @@
+{
+  "indexes": [
+   {
+      "collectionGroup": "participation",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "game_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "user_pubkey",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "las_updated_time",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ]
+  },
+  {
+    "collectionGroup": "game",
+    "queryScope": "COLLECTION",
+    "fields": [
+      {
+        "fieldPath": "is_ended",
+        "order": "ASCENDING"
+      },
+      {
+        "fieldPath": "end_date",
+        "order": "ASCENDING"
+      },
+      {
+        "fieldPath": "__name__",
+        "order": "DESCENDING"
+      }
+      ]
+  }
+  ],
+  "fieldOverrides": []
+}

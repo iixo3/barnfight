@@ -1,0 +1,34 @@
+{
+  "rules": {
+    "games": {
+      "$gameId": {
+        "stats": {
+          ".read": true,
+          ".write": false
+        },
+        "tokens": {
+            ".read": true,
+            ".write": false
+        },
+        "lobby": {
+          "messages": {
+            ".read": true,
+            "$messageId": {
+              ".write": "auth != null && !(root.child('games').child($gameId).child('lobby').child('banned').child(auth.uid).exists()) && (!data.exists() || data.child('senderId').val() === auth.uid)",
+              ".validate": "newData.hasChildren(['senderId', 'text', 'timestamp']) && newData.child('senderId').val() === auth.uid"
+            }
+          },
+          "banned": {
+            ".write": "auth != null && root.child('games').child($gameId).child('creatorId').val() === auth.uid"
+          }
+        }
+      }
+    },
+    "users": {
+      "$userId": {
+        ".read": "auth != null && auth.uid === $userId",
+        ".write": "auth != null && auth.uid === $userId"
+      }
+    }
+  }
+}
